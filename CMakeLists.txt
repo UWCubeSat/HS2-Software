@@ -1,8 +1,8 @@
-####
+# ====================================================================
 # HS2-Software: CubeSat High-Speed Software Project
 # This sets up the build system for the HS2 project, including
 # components and deployments. It imports the F Prime framework.
-####
+# ====================================================================
 
 cmake_minimum_required(VERSION 3.16)
 cmake_policy(SET CMP0048 NEW)

@@ -1,7 +1,7 @@
-####
+# ====================================================================
 # HS2/HS2Deployment/CMakeLists.txt
 # Deployment configuration for HS2 software
-####
+# ====================================================================
 
 set(SOURCE_FILES
   "${CMAKE_CURRENT_LIST_DIR}/Main.cpp"
