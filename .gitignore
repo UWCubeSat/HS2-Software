@@ -1,0 +1,46 @@
+# F Prime build artifacts
+logs/
+cmake-build-*
+build-artifacts/
+build-fprime-*
+*-template
+*.template.cpp
+*.template.hpp
+
+# Python virtual environments
+/venv/
+/fprime-venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE and editor files
+/.idea/
+/.vscode/
+.DS_Store
+
+# Coverage and test artifacts
+*.gcov
+*.gcda
+*.gcno
+
+# Compiled Object files
+*.o
+*.obj
+
+# Executables
+*.exe
+*.out
+*.app
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Temporary files
+*.swp
+*.swo
+*~

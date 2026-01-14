@@ -1,0 +1,13 @@
+# Clang-tidy configuration for HS2 Software following F Prime design style
+# This includes checks for code design, formatting, and enforcing patterns
+# like proper port usage and manager-worker patterns
+
+Checks: >
+    bugprone-unhandled-self-assignment,
+    modernize-deprecated-headers,
+    modernize-redundant-void-arg,
+    modernize-use-bool-literals,
+    modernize-use-nullptr,
+    readability-braces-around-statements,
+    -clang-analyzer-security.insecureAPI.rand
+WarningsAsErrors: '*'
