@@ -20,11 +20,13 @@ cd HS2-Software
 
 ### 2. Set Up F Prime Submodule
 
-```bash
-# Add the F Prime framework as a submodule
-git submodule add https://github.com/nasa/fprime.git lib/fprime
+**Note**: This step is only needed when setting up the repository for the first time or if the submodule doesn't exist yet.
 
-# Initialize and update submodules
+```bash
+# Add the F Prime framework as a submodule (only if not already added)
+git submodule add https://github.com/nasa/fprime.git lib/fprime 2>/dev/null || true
+
+# Initialize and update submodules (always safe to run)
 git submodule update --init --recursive
 ```
 

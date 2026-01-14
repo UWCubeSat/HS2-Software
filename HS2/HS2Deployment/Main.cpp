@@ -3,6 +3,9 @@
 // Main entry point for HS2 deployment
 // ====================================================================
 
+// Using C-style I/O for embedded system compatibility
+// printf is preferred over iostream in F Prime applications
+// for better control over output and smaller binary size
 #include <cstdio>
 #include <cstdlib>
 
