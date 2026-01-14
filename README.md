@@ -13,10 +13,7 @@ HS2-Software/
 ├── .github/
 │   └── workflows/          # CI/CD workflows including cpplint
 ├── HS2/
-│   ├── Components/         # Custom F Prime components
-│   └── HS2Deployment/      # Main deployment configuration
-│       ├── Main.cpp        # Entry point
-│       └── Top/            # Topology definitions
+│   ├── IN PROGRESS**
 ├── lib/
 │   └── fprime/            # F Prime framework (submodule)
 ├── .clang-format          # Code formatting rules
