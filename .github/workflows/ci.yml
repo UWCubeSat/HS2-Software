@@ -33,7 +33,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ ! -f "lib/fprime/requirements.txt" ]; then
-            echo "Missing lib/fprime/requirements.txt. Ensure submodules are initialized."
+            echo "Cloning F Prime into lib/fprime"
+            rm -rf lib/fprime
+            git clone --depth 1 https://github.com/nasa/fprime.git lib/fprime
+          fi
+          if [ ! -f "lib/fprime/requirements.txt" ]; then
+            echo "Missing lib/fprime/requirements.txt after clone."
             exit 1
           fi
           pip install -r lib/fprime/requirements.txt

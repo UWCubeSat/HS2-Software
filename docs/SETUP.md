@@ -36,11 +36,14 @@ git clone https://github.com/UWCubeSat/HS2-Software.git
 cd HS2-Software
 ```
 
-### 2. Set Up F Prime Submodule
+### 2. Set Up F Prime Dependency
 
 ```bash
 # Initialize and update submodules (always safe to run)
 git submodule update --init --recursive
+
+# If submodules aren't configured yet, clone F Prime:
+test -f lib/fprime/requirements.txt || git clone --depth 1 https://github.com/nasa/fprime.git lib/fprime
 ```
 
 ### 3. Create Python Virtual Environment
@@ -121,11 +124,16 @@ source fprime-venv/bin/activate
 pip install fprime-tools
 ```
 
-### Issue: Submodule missing or empty `lib/fprime`
+### Issue: F Prime missing or empty `lib/fprime`
 
 **Solution**: Initialize submodules:
 ```bash
 git submodule update --init --recursive
+```
+
+If that doesn't work, clone F Prime:
+```bash
+git clone --depth 1 https://github.com/nasa/fprime.git lib/fprime
 ```
 
 ### Issue: CMake errors about F Prime not found

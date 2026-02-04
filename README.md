@@ -61,10 +61,12 @@ git clone https://github.com/UWCubeSat/HS2-Software.git
 cd HS2-Software
 ```
 
-### 2. Initialize F Prime Submodule
+### 2. Initialize F Prime Dependency
 
 ```bash
 git submodule update --init --recursive
+# If submodules aren't configured yet, clone F Prime:
+test -f lib/fprime/requirements.txt || git clone --depth 1 https://github.com/nasa/fprime.git lib/fprime
 ```
 
 ### 3. Set Up Python Virtual Environment (Recommended)

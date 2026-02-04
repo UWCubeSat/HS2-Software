@@ -12,8 +12,14 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 1
 fi
 
-echo "==> Initializing submodules"
-git -C "${ROOT_DIR}" submodule update --init --recursive
+if [ ! -f "${ROOT_DIR}/lib/fprime/requirements.txt" ]; then
+  echo "==> Cloning F Prime into lib/fprime"
+  rm -rf "${ROOT_DIR}/lib/fprime"
+  git clone --depth 1 https://github.com/nasa/fprime.git "${ROOT_DIR}/lib/fprime"
+else
+  echo "==> Initializing submodules"
+  git -C "${ROOT_DIR}" submodule update --init --recursive
+fi
 
 echo "==> Creating virtual environment"
 python3 -m venv "${VENV_DIR}"
@@ -26,7 +32,7 @@ echo "==> Upgrading pip"
 python -m pip install --upgrade pip
 
 if [ ! -f "${ROOT_DIR}/lib/fprime/requirements.txt" ]; then
-  echo "Error: lib/fprime/requirements.txt not found. Check submodules."
+  echo "Error: lib/fprime/requirements.txt not found. Check F Prime clone."
   exit 1
 fi
 

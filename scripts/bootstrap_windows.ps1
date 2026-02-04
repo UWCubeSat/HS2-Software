@@ -11,8 +11,17 @@ if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
   Write-Error "python not found. Install Python 3.9+ and retry."
 }
 
-Write-Host "==> Initializing submodules"
-git -C $RootDir submodule update --init --recursive
+$ReqFile = Join-Path $RootDir "lib\fprime\requirements.txt"
+if (-not (Test-Path $ReqFile)) {
+  Write-Host "==> Cloning F Prime into lib/fprime"
+  if (Test-Path (Join-Path $RootDir "lib\fprime")) {
+    Remove-Item -Recurse -Force (Join-Path $RootDir "lib\fprime")
+  }
+  git clone --depth 1 https://github.com/nasa/fprime.git (Join-Path $RootDir "lib\fprime")
+} else {
+  Write-Host "==> Initializing submodules"
+  git -C $RootDir submodule update --init --recursive
+}
 
 Write-Host "==> Creating virtual environment"
 python -m venv $VenvDir
@@ -24,9 +33,8 @@ $Activate = Join-Path $VenvDir "Scripts\Activate.ps1"
 Write-Host "==> Upgrading pip"
 python -m pip install --upgrade pip
 
-$ReqFile = Join-Path $RootDir "lib\fprime\requirements.txt"
 if (-not (Test-Path $ReqFile)) {
-  Write-Error "lib\fprime\requirements.txt not found. Check submodules."
+  Write-Error "lib\fprime\requirements.txt not found. Check F Prime clone."
 }
 
 Write-Host "==> Installing F Prime dependencies and tools"
