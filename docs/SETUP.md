@@ -9,6 +9,24 @@ This guide will help you get started with the HS2-Software project.
 - CMake 3.16 or later
 - Git
 
+## One-Command Setup
+
+macOS:
+```bash
+chmod +x ./scripts/bootstrap_macos.sh
+./scripts/bootstrap_macos.sh
+```
+
+Windows (PowerShell):
+```powershell
+.\scripts\bootstrap_windows.ps1
+```
+
+If PowerShell blocks scripts, run:
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+```
+
 ## Step-by-Step Setup
 
 ### 1. Clone the Repository
@@ -20,12 +38,7 @@ cd HS2-Software
 
 ### 2. Set Up F Prime Submodule
 
-**Note**: This step is only needed when setting up the repository for the first time or if the submodule doesn't exist yet.
-
 ```bash
-# Add the F Prime framework as a submodule (only if not already added)
-git submodule add https://github.com/nasa/fprime.git lib/fprime 2>/dev/null || true
-
 # Initialize and update submodules (always safe to run)
 git submodule update --init --recursive
 ```
@@ -85,6 +98,12 @@ fprime-util format
 cpplint --recursive HS2/
 ```
 
+Run unit tests with coverage (from a component directory) to verify coverage tooling:
+
+```bash
+fprime-util check --all --coverage
+```
+
 ## Next Steps
 
 - Read the [README.md](../README.md) for project overview
@@ -100,6 +119,13 @@ cpplint --recursive HS2/
 ```bash
 source fprime-venv/bin/activate
 pip install fprime-tools
+```
+
+### Issue: Submodule missing or empty `lib/fprime`
+
+**Solution**: Initialize submodules:
+```bash
+git submodule update --init --recursive
 ```
 
 ### Issue: CMake errors about F Prime not found

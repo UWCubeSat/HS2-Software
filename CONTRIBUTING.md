@@ -215,8 +215,24 @@ GitHub Actions will automatically:
 - Run cpplint on all C++ files
 - Check for style violations
 - Report issues in the PR
+- Build the project and run unit tests (when tests exist)
+- Run unit tests with coverage (when tests exist)
+- Auto-label PRs based on changed files
+- Sync required labels in the repo
 
 Fix any issues reported by CI before merging.
+
+### Branch Protection (Maintainers)
+
+Required status checks are enforced in GitHub branch protection rules (not in code).
+Recommended required checks for `main` and `develop`:
+- `Code Scan: Cpplint`
+- `CI: Build and Unit Tests`
+- `CI: Unit Test Coverage`
+- `PR: Auto Label`
+
+Set them in GitHub:
+`Settings → Branches → Add rule → Require status checks to pass before merging`
 
 ## Getting Help
 

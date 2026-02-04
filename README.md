@@ -13,7 +13,8 @@ HS2-Software/
 ├── .github/
 │   └── workflows/          # CI/CD workflows including cpplint
 ├── HS2/
-│   ├── IN PROGRESS**
+│   ├── Components/         # Custom F Prime components
+│   └── HS2Deployment/      # Main deployment configuration
 ├── lib/
 │   └── fprime/            # F Prime framework (submodule)
 ├── .clang-format          # Code formatting rules
@@ -31,12 +32,27 @@ HS2-Software/
    - CMake 3.16+
    - GCC/Clang compiler with C++11 support
    - Python 3.9+
-3. **F Prime Tools**:
-   ```bash
-   pip install fprime-tools fprime-gds
-   ```
+3. **Python packaging**: `pip` available on PATH
 
 ## Getting Started
+
+### One-Command Setup
+
+macOS:
+```bash
+chmod +x ./scripts/bootstrap_macos.sh
+./scripts/bootstrap_macos.sh
+```
+
+Windows (PowerShell):
+```powershell
+.\scripts\bootstrap_windows.ps1
+```
+
+If PowerShell blocks scripts, run:
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+```
 
 ### 1. Clone the Repository
 
@@ -48,7 +64,6 @@ cd HS2-Software
 ### 2. Initialize F Prime Submodule
 
 ```bash
-git submodule add https://github.com/nasa/fprime.git lib/fprime
 git submodule update --init --recursive
 ```
 
@@ -59,17 +74,39 @@ python3 -m venv fprime-venv
 source fprime-venv/bin/activate  # On Windows: fprime-venv\Scripts\activate
 pip install -r lib/fprime/requirements.txt
 pip install fprime-tools fprime-gds
+pip install pre-commit cpplint
 ```
 
-### 4. Generate Build Files
+### 4. Set Up Pre-commit Hooks (Optional, Recommended)
+
+```bash
+pre-commit install
+```
+
+### 5. Generate Build Files
 
 ```bash
 fprime-util generate
 ```
 
-### 5. Build the Project
+### 6. Build the Project
 
 ```bash
+fprime-util build
+```
+
+### Verify Setup (Optional)
+
+```bash
+fprime-util format
+cpplint --recursive HS2/
+```
+
+## Common Day-to-Day Workflow
+
+```bash
+source fprime-venv/bin/activate
+fprime-util generate
 fprime-util build
 ```
 
@@ -106,6 +143,10 @@ pre-commit install
 
 The project uses GitHub Actions for automated code quality checks:
 - **Cpplint Scan**: Runs on every push and pull request to ensure code style compliance
+- **Unit Test Coverage**: Runs component unit tests with coverage when tests exist
+- **Build and Unit Tests**: Builds the project and runs unit tests when tests exist
+- **PR Auto Labeling**: Applies labels based on the files changed
+- **Label Sync**: Ensures required labels exist in the repo
 
 ## Development Guidelines
 
@@ -151,6 +192,11 @@ Run integration tests:
 fprime-util check --integration
 ```
 
+Run unit tests with coverage (from a component directory):
+```bash
+fprime-util check --all --coverage
+```
+
 ## Documentation
 
 - [F Prime Documentation](https://fprime.jpl.nasa.gov/)
@@ -164,10 +210,22 @@ fprime-util check --integration
 3. Run linters and tests
 4. Submit a pull request
 
+### Branch Protection (Maintainers)
+
+Required status checks are enforced in GitHub branch protection rules (not in code).
+Recommended required checks for `main` and `develop`:
+- `Code Scan: Cpplint`
+- `CI: Build and Unit Tests`
+- `CI: Unit Test Coverage`
+- `PR: Auto Label`
+
+Set them in GitHub:
+`Settings → Branches → Add rule → Require status checks to pass before merging`
+
 ## License
 
 This project follows the licensing of the F Prime framework. See [LICENSE](LICENSE) for details.
 
 ## Contact
 
-For questions or issues, please open an issue on GitHub or contact the UW CubeSat team.
+For questions or issues, please open an issue on GitHub or contact the Husky Satellite Lab team.

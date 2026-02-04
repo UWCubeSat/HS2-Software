@@ -1,0 +1,47 @@
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "docs/**"
+          - "**/*.md"
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+
+components:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "HS2/Components/**"
+
+deployment:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "HS2/HS2Deployment/**"
+
+fprime:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "lib/**"
+
+build:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "CMakeLists.txt"
+          - "**/CMakeLists.txt"
+          - "settings.ini"
+
+tooling:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "scripts/**"
+          - ".clang-format"
+          - ".clang-tidy"
+          - "CPPLINT.cfg"
+          - ".pre-commit-config.yaml"
+
+tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/test/**"
+          - "**/test/ut/**"
