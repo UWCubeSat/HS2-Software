@@ -1,0 +1,25 @@
+labels:
+  - name: docs
+    color: "0E8A16"
+    description: Documentation changes
+  - name: ci
+    color: "1D76DB"
+    description: CI and automation
+  - name: components
+    color: "A2EEEF"
+    description: F Prime components
+  - name: deployment
+    color: "5319E7"
+    description: Deployment topology
+  - name: fprime
+    color: "0052CC"
+    description: F Prime framework/submodule
+  - name: build
+    color: "C2E0C6"
+    description: Build system and configuration
+  - name: tooling
+    color: "FBCA04"
+    description: Developer tooling
+  - name: tests
+    color: "BFD4F2"
+    description: Tests and test infrastructure

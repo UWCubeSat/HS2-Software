@@ -1,5 +1,16 @@
 # Quick Reference for HS2-Software Development
 
+## One-Command Setup
+
+```bash
+chmod +x ./scripts/bootstrap_macos.sh
+./scripts/bootstrap_macos.sh
+```
+
+```powershell
+.\scripts\bootstrap_windows.ps1
+```
+
 ## Linter Commands
 
 ```bash
@@ -30,6 +41,7 @@ fprime-util build --clean             # Clean build
 # Testing
 fprime-util check                     # Run unit tests
 fprime-util check --integration       # Run integration tests
+fprime-util check --all --coverage    # Run unit tests with coverage
 
 # Running
 fprime-util run                       # Run deployment
